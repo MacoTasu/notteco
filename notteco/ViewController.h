@@ -1,13 +1,7 @@
-//
-//  ViewController.h
-//  notteco
-//
-//  Created by Hisayo on 2012/12/29.
-//  Copyright (c) 2012年 Hisayo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioServices.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController{
+    SystemSoundID soundId;
+}
 @end

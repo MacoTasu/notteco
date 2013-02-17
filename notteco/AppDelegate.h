@@ -1,12 +1,11 @@
-//
-//  AppDelegate.h
-//  notteco
-//
-//  Created by Hisayo on 2012/12/29.
-//  Copyright (c) 2012年 Hisayo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+
+
+
+@protocol Delegate <NSObject>
+-(void)didSelectedIcon:(id)sender;
+@end
+
 
 @class ViewController;
 
@@ -15,5 +14,11 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) ViewController *viewController;
+
+@property (assign)id delegateWitch;
+@property (assign)id <Delegate>delegate;
+@property (assign)id <Delegate>delegate2;
+@property (assign)id delegateLeft;
+@property (assign)id delegateRight;
 
 @end
