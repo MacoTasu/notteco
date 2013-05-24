@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //BGMをつけたい
+    //start bgm
     NSString *path = [[NSBundle mainBundle] pathForResource:@"top" ofType:@"wav"];
     NSURL *url = [NSURL fileURLWithPath:path];
     self.audio= [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
@@ -33,7 +33,6 @@
     _audio.numberOfLoops = -1;
     
     [self loadSounds];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +48,7 @@
     AccelerometerEx *acceView = [[AccelerometerEx alloc]initWithNibName:@"AccelerometerEx" bundle:nil];
     [self presentViewController:acceView animated:YES completion:nil];
     
-    //BGMとめたいぜ
+    //stop bgm
     [_audio stop];
     [self beep];
 }

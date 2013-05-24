@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     _sg = [[SGSelectViewController alloc]init];
+    
     [self.view addSubview:_sg.view];
     [_sg sgViewAppear];
     
@@ -41,7 +42,6 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
 }
 
 - (void)didReceiveMemoryWarning

@@ -122,11 +122,24 @@
         
         // 使用可能かどうかチェックする
         if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {
+            // Debug用
+            //写真とるよの画像を設定
+            backimage.image = [UIImage imageNamed:@"train.png"];
+            //出発ボタンの画像を設定
+            [btn setBackgroundImage:[UIImage imageNamed:@"btn_go.png"] forState:UIControlStateNormal];
+            
+            //Alert
+            UIAlertView *alert = [[UIAlertView alloc] init];
+            alert.title = @"ちょっとまって！";
+            alert.message = @"きみのでんわにはカメラがないみたいだね。カメラがついてるでんわで遊んでね♪";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            [alert release];
             return;
         }
         
         // イメージピッカーを作る
-        UIImagePickerController*    imagePicker;
+        UIImagePickerController   *imagePicker;
         imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = sourceType;
         //imagePicker.allowsEditing = YES;
@@ -149,10 +162,17 @@
 //メモリの解放
 - (void)dealloc {
     [_label release];
+    [right release];
+    [left release];
+    [_image release];
+    [_acce release];
     [_orientation release];
     [imageviewleft release];
     [imageviewright release];
     [faceimage release];
+    [backimage release];
+    [imageview1 release];
+    [imageview2 release];
     [super dealloc];
 }
 
@@ -300,12 +320,13 @@
         imageviewleft.contentMode = UIViewContentModeScaleAspectFit;
         [imageviewleft startAnimating];  // アニメーションを開始したい時に呼ぶ
     }else{
-        // 複数行で書くボテン
+        // 複数行で書く
         UIAlertView *alert = [[UIAlertView alloc] init];
         alert.title = @"あれれ？";
         alert.message = @"おともだちを２ひきのせてね！";
         [alert addButtonWithTitle:@"OK"];
         [alert show];
+        [alert release];
     }
     
 }
@@ -331,6 +352,10 @@
 }
 
 -(IBAction)backBtn:(id)sender{
+    //初期化
+    AppDelegate* d = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    d.delegateLeft = nil;
+    d.delegateRight = nil;
     
     backbtn.hidden = YES;
     

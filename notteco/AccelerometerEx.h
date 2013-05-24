@@ -8,7 +8,7 @@
     IBOutlet UIImageView *imageview1;
     IBOutlet UIImageView *imageview2;
     IBOutlet UIImageView *faceimage;
-    IBOutlet UIImageView * backimage;
+    IBOutlet UIImageView *backimage;
     IBOutlet UIButton *btn;
     IBOutlet UIButton *backbtn;
 

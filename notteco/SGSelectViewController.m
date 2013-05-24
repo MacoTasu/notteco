@@ -75,8 +75,8 @@
     if (self) {
         
         [self setImage];
-        [self loadImage];
         [self viewDetail];
+        [self loadImage];
         
     }
     
@@ -119,18 +119,21 @@
     //x is Row count
     int x = 0;
     
-    if([_iconArray count] % ONE_ROW_ICON != 0)
-        x = [_iconArray count]/ONE_ROW_ICON + 1;
+    if([_ar count] % ONE_ROW_ICON != 0)
+        x = [_ar count]/ONE_ROW_ICON + 1;
     else
-        x = [_iconArray count]/ONE_ROW_ICON ;
+        x = [_ar count]/ONE_ROW_ICON ;
     
     [self.view setAlpha:0.0];
-    [self.view setFrame:CGRectMake(VIEW_ORIGIN_X, VIEW_ORIGIN_Y, (MARGIN_X+BTN_W_H)*ONE_ROW_ICON+MARGIN_X, BUTTOM_MARGIN + (BTN_W_H+MARGIN_Y)*x)];
+    
+    CGRect r = [[UIScreen mainScreen] bounds];
+    CGFloat w = r.size.width;
+    if( w == 480 ) {
+        [self.view setFrame:CGRectMake(0, VIEW_ORIGIN_Y, 480, BUTTOM_MARGIN + (BTN_W_H+MARGIN_Y)*x)];
+    } else {
+        [self.view setFrame:CGRectMake(0, VIEW_ORIGIN_Y, 568, BUTTOM_MARGIN + (BTN_W_H+MARGIN_Y)*x)];
+    }
     [self.view setClipsToBounds:true];
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    UIImage *backgroundImage = [UIImage imageNamed:@"balloon.png"];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
-    self.view.layer.cornerRadius = 5;
 }
 
 
@@ -152,7 +155,7 @@
         
         if(count<BUTTON_COUNT){
             _btn[count] = [UIButton buttonWithType:UIButtonTypeCustom];
-            [_btn[count] setFrame:CGRectMake((index+1)*MARGIN_X+index*BTN_W_H,TOP_MARGIN+(MARGIN_Y+BTN_W_H)*row, BTN_W_H, BTN_W_H)];
+            [_btn[count] setFrame:CGRectMake(((((self.view.bounds.size.width-(BTN_W_H*ONE_ROW_ICON))/ONE_ROW_ICON)*index+1)+13),TOP_MARGIN+(MARGIN_Y+BTN_W_H)*row, BTN_W_H, BTN_W_H)];
             [_btn[count] setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",[_iconArray objectAtIndex:count]]] forState:UIControlStateNormal];
             [_btn[count] addTarget:self action:@selector(changeIcon:) forControlEvents:UIControlEventTouchUpInside];
             [_btn[count] setTag:count];
